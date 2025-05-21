@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: sso/sso.proto
+// source: proto/sso/sso.proto
 
 package sso
 
@@ -72,15 +72,16 @@ func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...gr
 }
 
 // AuthServer is the server API for Auth service.
-// All implementations should embed UnimplementedAuthServer
+// All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
 type AuthServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
+	mustEmbedUnimplementedAuthServer()
 }
 
-// UnimplementedAuthServer should be embedded to have
+// UnimplementedAuthServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
@@ -96,7 +97,8 @@ func (UnimplementedAuthServer) Login(context.Context, *LoginRequest) (*LoginResp
 func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
 }
-func (UnimplementedAuthServer) testEmbeddedByValue() {}
+func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
+func (UnimplementedAuthServer) testEmbeddedByValue()              {}
 
 // UnsafeAuthServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to AuthServer will
@@ -191,5 +193,5 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "sso/sso.proto",
+	Metadata: "proto/sso/sso.proto",
 }
