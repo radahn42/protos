@@ -4,6 +4,8 @@ package auth;
 
 option go_package = "radahn.sso.v1;ssov1";
 
+import "buf/validate/validate.proto";
+
 service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
@@ -11,8 +13,12 @@ service Auth {
 }
 
 message RegisterRequest {
-  string email = 1;
-  string password = 2;
+  string email = 1 [(buf.validate.field).string.email = true];
+  string password = 2 [
+    (buf.validate.field).string.pattern = "^[a-zA-Z0-9]*$",
+    (buf.validate.field).string.min_len = 8,
+    (buf.validate.field).string.max_len = 32
+  ];
 }
 
 message RegisterResponse {
@@ -20,8 +26,12 @@ message RegisterResponse {
 }
 
 message LoginRequest {
-  string email = 1;
-  string password = 2;
+  string email = 1 [(buf.validate.field).string.email = true];
+  string password = 2 [
+    (buf.validate.field).string.pattern = "^[a-zA-Z0-9]*$",
+    (buf.validate.field).string.min_len = 8,
+    (buf.validate.field).string.max_len = 32
+  ];
   int32 app_id = 3;
 }
 
