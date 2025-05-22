@@ -15,7 +15,7 @@ service Auth {
 message RegisterRequest {
   string email = 1 [(buf.validate.field).string.email = true];
   string password = 2 [
-    (buf.validate.field).string.pattern = "^[a-zA-Z0-9]*$",
+    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
     (buf.validate.field).string.min_len = 8,
     (buf.validate.field).string.max_len = 32
   ];
@@ -28,7 +28,7 @@ message RegisterResponse {
 message LoginRequest {
   string email = 1 [(buf.validate.field).string.email = true];
   string password = 2 [
-    (buf.validate.field).string.pattern = "^[a-zA-Z0-9]*$",
+    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
     (buf.validate.field).string.min_len = 8,
     (buf.validate.field).string.max_len = 32
   ];
