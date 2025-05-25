@@ -19,16 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_Register_FullMethodName             = "/auth.Auth/Register"
-	Auth_Login_FullMethodName                = "/auth.Auth/Login"
-	Auth_IsAdmin_FullMethodName              = "/auth.Auth/IsAdmin"
-	Auth_SetUserIsAdmin_FullMethodName       = "/auth.Auth/SetUserIsAdmin"
-	Auth_SetUserIsNotAdmin_FullMethodName    = "/auth.Auth/SetUserIsNotAdmin"
-	Auth_RequestPasswordReset_FullMethodName = "/auth.Auth/RequestPasswordReset"
-	Auth_ConfirmPasswordReset_FullMethodName = "/auth.Auth/ConfirmPasswordReset"
-	Auth_ChangePassword_FullMethodName       = "/auth.Auth/ChangePassword"
-	Auth_Logout_FullMethodName               = "/auth.Auth/Logout"
-	Auth_ValidateToken_FullMethodName        = "/auth.Auth/ValidateToken"
+	Auth_Register_FullMethodName                 = "/auth.Auth/Register"
+	Auth_Login_FullMethodName                    = "/auth.Auth/Login"
+	Auth_AssignRoleToUser_FullMethodName         = "/auth.Auth/AssignRoleToUser"
+	Auth_RevokeRoleFromUser_FullMethodName       = "/auth.Auth/RevokeRoleFromUser"
+	Auth_HasPermission_FullMethodName            = "/auth.Auth/HasPermission"
+	Auth_GetUserRoles_FullMethodName             = "/auth.Auth/GetUserRoles"
+	Auth_GetAllRoles_FullMethodName              = "/auth.Auth/GetAllRoles"
+	Auth_CreateRole_FullMethodName               = "/auth.Auth/CreateRole"
+	Auth_DeleteRole_FullMethodName               = "/auth.Auth/DeleteRole"
+	Auth_AddPermissionToRole_FullMethodName      = "/auth.Auth/AddPermissionToRole"
+	Auth_RemovePermissionFromRole_FullMethodName = "/auth.Auth/RemovePermissionFromRole"
+	Auth_RequestPasswordReset_FullMethodName     = "/auth.Auth/RequestPasswordReset"
+	Auth_ConfirmPasswordReset_FullMethodName     = "/auth.Auth/ConfirmPasswordReset"
+	Auth_ChangePassword_FullMethodName           = "/auth.Auth/ChangePassword"
+	Auth_Logout_FullMethodName                   = "/auth.Auth/Logout"
+	Auth_ValidateToken_FullMethodName            = "/auth.Auth/ValidateToken"
 )
 
 // AuthClient is the client API for Auth service.
@@ -37,18 +43,19 @@ const (
 type AuthClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
-	SetUserIsAdmin(ctx context.Context, in *SetUserIsAdminRequest, opts ...grpc.CallOption) (*SetUserIsAdminResponse, error)
-	SetUserIsNotAdmin(ctx context.Context, in *SetUserIsNotAdminRequest, opts ...grpc.CallOption) (*SetUserIsNotAdminResponse, error)
-	// Запрашивает сброс пароля для пользователя. Отправляет токен сброса по email.
+	AssignRoleToUser(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error)
+	RevokeRoleFromUser(ctx context.Context, in *RevokeRoleFromUserRequest, opts ...grpc.CallOption) (*RevokeRoleFromUserResponse, error)
+	HasPermission(ctx context.Context, in *HasPermissionRequest, opts ...grpc.CallOption) (*HasPermissionResponse, error)
+	GetUserRoles(ctx context.Context, in *GetUserRolesRequest, opts ...grpc.CallOption) (*GetUserRolesResponse, error)
+	GetAllRoles(ctx context.Context, in *GetAllRolesRequest, opts ...grpc.CallOption) (*GetAllRolesResponse, error)
+	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error)
+	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error)
+	AddPermissionToRole(ctx context.Context, in *AddPermissionToRoleRequest, opts ...grpc.CallOption) (*AddPermissionToRoleResponse, error)
+	RemovePermissionFromRole(ctx context.Context, in *RemovePermissionFromRoleRequest, opts ...grpc.CallOption) (*RemovePermissionFromRoleResponse, error)
 	RequestPasswordReset(ctx context.Context, in *RequestPasswordResetRequest, opts ...grpc.CallOption) (*RequestPasswordResetResponse, error)
-	// Подтверждает сброс пароля, используя токен сброса, и устанавливает новый пароль.
 	ConfirmPasswordReset(ctx context.Context, in *ConfirmPasswordResetRequest, opts ...grpc.CallOption) (*ConfirmPasswordResetResponse, error)
-	// Позволяет авторизованному пользователю изменить свой пароль.
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
-	// Завершает сессию пользователя, отзывая текущий JWT-токен.
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
-	// Валидирует переданный JWT-токен и возвращает информацию о пользователе из токена.
 	ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenResponse, error)
 }
 
@@ -80,30 +87,90 @@ func (c *authClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.C
 	return out, nil
 }
 
-func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error) {
+func (c *authClient) AssignRoleToUser(ctx context.Context, in *AssignRoleToUserRequest, opts ...grpc.CallOption) (*AssignRoleToUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsAdminResponse)
-	err := c.cc.Invoke(ctx, Auth_IsAdmin_FullMethodName, in, out, cOpts...)
+	out := new(AssignRoleToUserResponse)
+	err := c.cc.Invoke(ctx, Auth_AssignRoleToUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authClient) SetUserIsAdmin(ctx context.Context, in *SetUserIsAdminRequest, opts ...grpc.CallOption) (*SetUserIsAdminResponse, error) {
+func (c *authClient) RevokeRoleFromUser(ctx context.Context, in *RevokeRoleFromUserRequest, opts ...grpc.CallOption) (*RevokeRoleFromUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetUserIsAdminResponse)
-	err := c.cc.Invoke(ctx, Auth_SetUserIsAdmin_FullMethodName, in, out, cOpts...)
+	out := new(RevokeRoleFromUserResponse)
+	err := c.cc.Invoke(ctx, Auth_RevokeRoleFromUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *authClient) SetUserIsNotAdmin(ctx context.Context, in *SetUserIsNotAdminRequest, opts ...grpc.CallOption) (*SetUserIsNotAdminResponse, error) {
+func (c *authClient) HasPermission(ctx context.Context, in *HasPermissionRequest, opts ...grpc.CallOption) (*HasPermissionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetUserIsNotAdminResponse)
-	err := c.cc.Invoke(ctx, Auth_SetUserIsNotAdmin_FullMethodName, in, out, cOpts...)
+	out := new(HasPermissionResponse)
+	err := c.cc.Invoke(ctx, Auth_HasPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) GetUserRoles(ctx context.Context, in *GetUserRolesRequest, opts ...grpc.CallOption) (*GetUserRolesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserRolesResponse)
+	err := c.cc.Invoke(ctx, Auth_GetUserRoles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) GetAllRoles(ctx context.Context, in *GetAllRolesRequest, opts ...grpc.CallOption) (*GetAllRolesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllRolesResponse)
+	err := c.cc.Invoke(ctx, Auth_GetAllRoles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*CreateRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateRoleResponse)
+	err := c.cc.Invoke(ctx, Auth_CreateRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*DeleteRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRoleResponse)
+	err := c.cc.Invoke(ctx, Auth_DeleteRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) AddPermissionToRole(ctx context.Context, in *AddPermissionToRoleRequest, opts ...grpc.CallOption) (*AddPermissionToRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddPermissionToRoleResponse)
+	err := c.cc.Invoke(ctx, Auth_AddPermissionToRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) RemovePermissionFromRole(ctx context.Context, in *RemovePermissionFromRoleRequest, opts ...grpc.CallOption) (*RemovePermissionFromRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemovePermissionFromRoleResponse)
+	err := c.cc.Invoke(ctx, Auth_RemovePermissionFromRole_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -166,18 +233,19 @@ func (c *authClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest
 type AuthServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
-	SetUserIsAdmin(context.Context, *SetUserIsAdminRequest) (*SetUserIsAdminResponse, error)
-	SetUserIsNotAdmin(context.Context, *SetUserIsNotAdminRequest) (*SetUserIsNotAdminResponse, error)
-	// Запрашивает сброс пароля для пользователя. Отправляет токен сброса по email.
+	AssignRoleToUser(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error)
+	RevokeRoleFromUser(context.Context, *RevokeRoleFromUserRequest) (*RevokeRoleFromUserResponse, error)
+	HasPermission(context.Context, *HasPermissionRequest) (*HasPermissionResponse, error)
+	GetUserRoles(context.Context, *GetUserRolesRequest) (*GetUserRolesResponse, error)
+	GetAllRoles(context.Context, *GetAllRolesRequest) (*GetAllRolesResponse, error)
+	CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error)
+	DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error)
+	AddPermissionToRole(context.Context, *AddPermissionToRoleRequest) (*AddPermissionToRoleResponse, error)
+	RemovePermissionFromRole(context.Context, *RemovePermissionFromRoleRequest) (*RemovePermissionFromRoleResponse, error)
 	RequestPasswordReset(context.Context, *RequestPasswordResetRequest) (*RequestPasswordResetResponse, error)
-	// Подтверждает сброс пароля, используя токен сброса, и устанавливает новый пароль.
 	ConfirmPasswordReset(context.Context, *ConfirmPasswordResetRequest) (*ConfirmPasswordResetResponse, error)
-	// Позволяет авторизованному пользователю изменить свой пароль.
 	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
-	// Завершает сессию пользователя, отзывая текущий JWT-токен.
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
-	// Валидирует переданный JWT-токен и возвращает информацию о пользователе из токена.
 	ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
@@ -195,14 +263,32 @@ func (UnimplementedAuthServer) Register(context.Context, *RegisterRequest) (*Reg
 func (UnimplementedAuthServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
+func (UnimplementedAuthServer) AssignRoleToUser(context.Context, *AssignRoleToUserRequest) (*AssignRoleToUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignRoleToUser not implemented")
 }
-func (UnimplementedAuthServer) SetUserIsAdmin(context.Context, *SetUserIsAdminRequest) (*SetUserIsAdminResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetUserIsAdmin not implemented")
+func (UnimplementedAuthServer) RevokeRoleFromUser(context.Context, *RevokeRoleFromUserRequest) (*RevokeRoleFromUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RevokeRoleFromUser not implemented")
 }
-func (UnimplementedAuthServer) SetUserIsNotAdmin(context.Context, *SetUserIsNotAdminRequest) (*SetUserIsNotAdminResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetUserIsNotAdmin not implemented")
+func (UnimplementedAuthServer) HasPermission(context.Context, *HasPermissionRequest) (*HasPermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HasPermission not implemented")
+}
+func (UnimplementedAuthServer) GetUserRoles(context.Context, *GetUserRolesRequest) (*GetUserRolesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserRoles not implemented")
+}
+func (UnimplementedAuthServer) GetAllRoles(context.Context, *GetAllRolesRequest) (*GetAllRolesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllRoles not implemented")
+}
+func (UnimplementedAuthServer) CreateRole(context.Context, *CreateRoleRequest) (*CreateRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
+}
+func (UnimplementedAuthServer) DeleteRole(context.Context, *DeleteRoleRequest) (*DeleteRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
+}
+func (UnimplementedAuthServer) AddPermissionToRole(context.Context, *AddPermissionToRoleRequest) (*AddPermissionToRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPermissionToRole not implemented")
+}
+func (UnimplementedAuthServer) RemovePermissionFromRole(context.Context, *RemovePermissionFromRoleRequest) (*RemovePermissionFromRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemovePermissionFromRole not implemented")
 }
 func (UnimplementedAuthServer) RequestPasswordReset(context.Context, *RequestPasswordResetRequest) (*RequestPasswordResetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RequestPasswordReset not implemented")
@@ -276,56 +362,164 @@ func _Auth_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_IsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsAdminRequest)
+func _Auth_AssignRoleToUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssignRoleToUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).IsAdmin(ctx, in)
+		return srv.(AuthServer).AssignRoleToUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Auth_IsAdmin_FullMethodName,
+		FullMethod: Auth_AssignRoleToUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).IsAdmin(ctx, req.(*IsAdminRequest))
+		return srv.(AuthServer).AssignRoleToUser(ctx, req.(*AssignRoleToUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_SetUserIsAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetUserIsAdminRequest)
+func _Auth_RevokeRoleFromUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeRoleFromUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).SetUserIsAdmin(ctx, in)
+		return srv.(AuthServer).RevokeRoleFromUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Auth_SetUserIsAdmin_FullMethodName,
+		FullMethod: Auth_RevokeRoleFromUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).SetUserIsAdmin(ctx, req.(*SetUserIsAdminRequest))
+		return srv.(AuthServer).RevokeRoleFromUser(ctx, req.(*RevokeRoleFromUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_SetUserIsNotAdmin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetUserIsNotAdminRequest)
+func _Auth_HasPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasPermissionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).SetUserIsNotAdmin(ctx, in)
+		return srv.(AuthServer).HasPermission(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Auth_SetUserIsNotAdmin_FullMethodName,
+		FullMethod: Auth_HasPermission_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).SetUserIsNotAdmin(ctx, req.(*SetUserIsNotAdminRequest))
+		return srv.(AuthServer).HasPermission(ctx, req.(*HasPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_GetUserRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRolesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetUserRoles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetUserRoles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetUserRoles(ctx, req.(*GetUserRolesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_GetAllRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllRolesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).GetAllRoles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_GetAllRoles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).GetAllRoles(ctx, req.(*GetAllRolesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_CreateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).CreateRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_CreateRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).CreateRole(ctx, req.(*CreateRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).DeleteRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_DeleteRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).DeleteRole(ctx, req.(*DeleteRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_AddPermissionToRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPermissionToRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).AddPermissionToRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_AddPermissionToRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).AddPermissionToRole(ctx, req.(*AddPermissionToRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_RemovePermissionFromRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePermissionFromRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).RemovePermissionFromRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_RemovePermissionFromRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).RemovePermissionFromRole(ctx, req.(*RemovePermissionFromRoleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -436,16 +630,40 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Auth_Login_Handler,
 		},
 		{
-			MethodName: "IsAdmin",
-			Handler:    _Auth_IsAdmin_Handler,
+			MethodName: "AssignRoleToUser",
+			Handler:    _Auth_AssignRoleToUser_Handler,
 		},
 		{
-			MethodName: "SetUserIsAdmin",
-			Handler:    _Auth_SetUserIsAdmin_Handler,
+			MethodName: "RevokeRoleFromUser",
+			Handler:    _Auth_RevokeRoleFromUser_Handler,
 		},
 		{
-			MethodName: "SetUserIsNotAdmin",
-			Handler:    _Auth_SetUserIsNotAdmin_Handler,
+			MethodName: "HasPermission",
+			Handler:    _Auth_HasPermission_Handler,
+		},
+		{
+			MethodName: "GetUserRoles",
+			Handler:    _Auth_GetUserRoles_Handler,
+		},
+		{
+			MethodName: "GetAllRoles",
+			Handler:    _Auth_GetAllRoles_Handler,
+		},
+		{
+			MethodName: "CreateRole",
+			Handler:    _Auth_CreateRole_Handler,
+		},
+		{
+			MethodName: "DeleteRole",
+			Handler:    _Auth_DeleteRole_Handler,
+		},
+		{
+			MethodName: "AddPermissionToRole",
+			Handler:    _Auth_AddPermissionToRole_Handler,
+		},
+		{
+			MethodName: "RemovePermissionFromRole",
+			Handler:    _Auth_RemovePermissionFromRole_Handler,
 		},
 		{
 			MethodName: "RequestPasswordReset",
