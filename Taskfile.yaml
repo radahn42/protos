@@ -13,3 +13,23 @@ tasks:
     desc: "Update deps"
     cmds:
       - buf dep update
+  lint:
+    desc: "Lint proto files for style and best practices"
+    cmds:
+      - buf lint
+  breaking:
+    desc: "Check for breaking changes in proto files against main branch of protos repo"
+    cmds:
+      - buf breaking --against 'https://github.com/radahn42/protos.git#branch=master'
+      # Или, если вы хотите сравнивать с предыдущим локальным коммитом (менее надежно для CI/CD, но полезно локально):
+      # - buf breaking --against 'HEAD~1'
+      # Или, если вы используете BSR (Buf Schema Registry) и публикуете туда модули:
+      # - buf breaking --against 'buf.build/radahn42/sso-protos:main' # Пример
+      # Используйте ту версию, которая наиболее подходит для вашего CI/CD.
+      # Вариант с 'https://...' наиболее надежен для отдельного репозитория protos.
+  all:
+    desc: "Run all proto-related tasks (lint, breaking, generate)"
+    cmds:
+      - task lint
+      - task breaking
+      - task generate
