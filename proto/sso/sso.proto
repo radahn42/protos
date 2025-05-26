@@ -7,11 +7,9 @@ option go_package = "radahn.sso.v1;ssov1";
 import "buf/validate/validate.proto";
 
 service Auth {
-  // User Authentication
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
 
-  // User & Role Management
   rpc AssignRoleToUser (AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
   rpc RevokeRoleFromUser (RevokeRoleFromUserRequest) returns (RevokeRoleFromUserResponse);
   rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesResponse);
@@ -20,7 +18,6 @@ service Auth {
   rpc DeleteRole (DeleteRoleRequest) returns (DeleteRoleResponse);
   rpc UpdateRole (UpdateRoleRequest) returns (UpdateRoleResponse);
 
-  // Permissions & Authorization
   rpc HasPermission (HasPermissionRequest) returns (HasPermissionResponse);
   rpc GetUserPermissions (GetUserPermissionsRequest) returns (GetUserPermissionsResponse);
   rpc CreatePermission (CreatePermissionRequest) returns (CreatePermissionResponse);
