@@ -7,38 +7,38 @@ option go_package = "radahn.sso.v1;ssov1";
 import "buf/validate/validate.proto";
 
 service Auth {
+  // User Authentication
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
 
+  // User & Role Management
   rpc AssignRoleToUser (AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
   rpc RevokeRoleFromUser (RevokeRoleFromUserRequest) returns (RevokeRoleFromUserResponse);
-  rpc HasPermission (HasPermissionRequest) returns (HasPermissionResponse);
   rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesResponse);
   rpc GetAllRoles (GetAllRolesRequest) returns (GetAllRolesResponse);
   rpc CreateRole (CreateRoleRequest) returns (CreateRoleResponse);
   rpc DeleteRole (DeleteRoleRequest) returns (DeleteRoleResponse);
+  rpc UpdateRole (UpdateRoleRequest) returns (UpdateRoleResponse);
+
+  // Permissions & Authorization
+  rpc HasPermission (HasPermissionRequest) returns (HasPermissionResponse);
+  rpc GetUserPermissions (GetUserPermissionsRequest) returns (GetUserPermissionsResponse);
+  rpc CreatePermission (CreatePermissionRequest) returns (CreatePermissionResponse);
+  rpc DeletePermission (DeletePermissionRequest) returns (DeletePermissionResponse);
+  rpc UpdatePermission (UpdatePermissionRequest) returns (UpdatePermissionResponse);
+  rpc GetPermissionByID (GetPermissionByIDRequest) returns (GetPermissionByIDResponse);
+  rpc GetPermissionByName (GetPermissionByNameRequest) returns (GetPermissionByNameResponse);
+  rpc GetAllPermissions (GetAllPermissionsRequest) returns (GetAllPermissionsResponse);
   rpc AddPermissionToRole (AddPermissionToRoleRequest) returns (AddPermissionToRoleResponse);
   rpc RemovePermissionFromRole (RemovePermissionFromRoleRequest) returns (RemovePermissionFromRoleResponse);
-
-  rpc RequestPasswordReset (RequestPasswordResetRequest) returns (RequestPasswordResetResponse);
-  rpc ConfirmPasswordReset (ConfirmPasswordResetRequest) returns (ConfirmPasswordResetResponse);
-  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
-
-  rpc Logout (LogoutRequest) returns (LogoutResponse);
-
-  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc GetRolePermissions (GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
 }
 
+// --- User Authentication Messages ---
+
 message RegisterRequest {
-  string email = 1 [
-    (buf.validate.field).string.email = true,
-    (buf.validate.field).string.max_len = 255
-  ];
-  string password = 2 [
-    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
-    (buf.validate.field).string.min_len = 8,
-    (buf.validate.field).string.max_len = 32
-  ];
+  string email = 1 [(buf.validate.field).string.email = true];
+  string password = 2 [(buf.validate.field).string.min_bytes = 6];
 }
 
 message RegisterResponse {
@@ -46,70 +46,48 @@ message RegisterResponse {
 }
 
 message LoginRequest {
-  string email = 1 [
-    (buf.validate.field).string.email = true,
-    (buf.validate.field).string.max_len = 255
-  ];
-  string password = 2 [
-    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
-    (buf.validate.field).string.min_len = 8,
-    (buf.validate.field).string.max_len = 32
-  ];
-  int32 app_id = 3 [
-    (buf.validate.field).int32.gt = 0
-  ];
+  string email = 1 [(buf.validate.field).string.email = true];
+  string password = 2 [(buf.validate.field).string.min_bytes = 6];
+  int32 app_id = 3;
 }
 
 message LoginResponse {
-  string token = 1 [
-    (buf.validate.field).string.min_len = 1
-  ];
+  string token = 1;
 }
 
-// Новые сообщения для управления ролями и разрешениями
+// --- Role Management Messages ---
+
 message AssignRoleToUserRequest {
-  int64 user_id = 1 [(buf.validate.field).int64.gt = 0];
-  string role_name = 2 [(buf.validate.field).string.min_len = 1];
+  int64 user_id = 1;
+  int64 role_id = 2;
 }
 
-message AssignRoleToUserResponse {
-  bool success = 1;
-}
+message AssignRoleToUserResponse {}
 
 message RevokeRoleFromUserRequest {
-  int64 user_id = 1 [(buf.validate.field).int64.gt = 0];
-  string role_name = 2 [(buf.validate.field).string.min_len = 1];
+  int64 user_id = 1;
+  int64 role_id = 2;
 }
 
-message RevokeRoleFromUserResponse {
-  bool success = 1;
-}
-
-message HasPermissionRequest {
-  int64 user_id = 1 [(buf.validate.field).int64.gt = 0];
-  string permission_name = 2 [(buf.validate.field).string.min_len = 1];
-}
-
-message HasPermissionResponse {
-  bool has_permission = 1;
-}
+message RevokeRoleFromUserResponse {}
 
 message GetUserRolesRequest {
-  int64 user_id = 1 [(buf.validate.field).int64.gt = 0];
+  int64 user_id = 1;
 }
 
 message GetUserRolesResponse {
-  repeated string role_names = 1;
+  repeated Role roles = 1;
 }
 
 message GetAllRolesRequest {}
 
 message GetAllRolesResponse {
-  repeated string role_names = 1;
+  repeated Role roles = 1;
 }
 
 message CreateRoleRequest {
-  string role_name = 1 [(buf.validate.field).string.min_len = 1];
+  string name = 1 [(buf.validate.field).string.min_bytes = 1];
+  string description = 2;
 }
 
 message CreateRoleResponse {
@@ -117,94 +95,116 @@ message CreateRoleResponse {
 }
 
 message DeleteRoleRequest {
-  string role_name = 1 [(buf.validate.field).string.min_len = 1];
+  int64 role_id = 1;
 }
 
-message DeleteRoleResponse {
-  bool success = 1;
+message DeleteRoleResponse {}
+
+message UpdateRoleRequest {
+  int64 role_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdateRoleResponse {}
+
+
+// --- Permission Management Messages ---
+
+message CreatePermissionRequest {
+  string name = 1 [(buf.validate.field).string.min_bytes = 1];
+  string description = 2;
+}
+
+message CreatePermissionResponse {
+  int64 permission_id = 1;
+}
+
+message DeletePermissionRequest {
+  int64 permission_id = 1;
+}
+
+message DeletePermissionResponse {}
+
+message UpdatePermissionRequest {
+  int64 permission_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdatePermissionResponse {}
+
+message GetPermissionByIDRequest {
+  int64 permission_id = 1;
+}
+
+message GetPermissionByIDResponse {
+  Permission permission = 1;
+}
+
+message GetPermissionByNameRequest {
+  string name = 1 [(buf.validate.field).string.min_bytes = 1];
+}
+
+message GetPermissionByNameResponse {
+  Permission permission = 1;
+}
+
+message GetAllPermissionsRequest {}
+
+message GetAllPermissionsResponse {
+  repeated Permission permissions = 1;
 }
 
 message AddPermissionToRoleRequest {
-  string role_name = 1 [(buf.validate.field).string.min_len = 1];
-  string permission_name = 2 [(buf.validate.field).string.min_len = 1];
+  int64 role_id = 1;
+  int64 permission_id = 2;
 }
 
-message AddPermissionToRoleResponse {
-  bool success = 1;
-}
+message AddPermissionToRoleResponse {}
 
 message RemovePermissionFromRoleRequest {
-  string role_name = 1 [(buf.validate.field).string.min_len = 1];
-  string permission_name = 2 [(buf.validate.field).string.min_len = 1];
+  int64 role_id = 1;
+  int64 permission_id = 2;
 }
 
-message RemovePermissionFromRoleResponse {
-  bool success = 1;
+message RemovePermissionFromRoleResponse {}
+
+message GetRolePermissionsRequest {
+  int64 role_id = 1;
 }
 
-message RequestPasswordResetRequest {
-  string email = 1 [
-    (buf.validate.field).string.email = true,
-    (buf.validate.field).string.max_len = 255
-  ];
+message GetRolePermissionsResponse {
+  repeated Permission permissions = 1;
 }
 
-message RequestPasswordResetResponse {}
-
-message ConfirmPasswordResetRequest {
-  string email = 1 [
-    (buf.validate.field).string.email = true,
-    (buf.validate.field).string.max_len = 255
-  ];
-  string reset_token = 2 [
-    (buf.validate.field).string.min_len = 32, // Примерная длина токена сброса
-    (buf.validate.field).string.max_len = 64,
-    (buf.validate.field).string.pattern = "^[a-zA-Z0-9_-]+$" // Токен может быть URL-safe base64
-  ];
-  string new_password = 3 [
-    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
-    (buf.validate.field).string.min_len = 8,
-    (buf.validate.field).string.max_len = 32
-  ];
+message GetUserPermissionsRequest {
+  int64 user_id = 1;
 }
 
-message ConfirmPasswordResetResponse {}
-
-message ChangePasswordRequest {
-  string old_password = 1 [
-    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
-    (buf.validate.field).string.min_len = 8,
-    (buf.validate.field).string.max_len = 32
-  ];
-  string new_password = 2 [
-    (buf.validate.field).string.pattern = "^[\\x21-\\x7E]{8,32}$",
-    (buf.validate.field).string.min_len = 8,
-    (buf.validate.field).string.max_len = 32
-  ];
+message GetUserPermissionsResponse {
+  repeated Permission permissions = 1;
 }
 
-message ChangePasswordResponse {}
-
-message LogoutRequest {
-  string token = 1 [
-    (buf.validate.field).string.min_len = 1
-  ];
+message HasPermissionRequest {
+  int64 user_id = 1;
+  string permission_name = 2;
 }
 
-message LogoutResponse {}
-
-message ValidateTokenRequest {
-  string token = 1 [
-    (buf.validate.field).string.min_len = 1
-  ];
+message HasPermissionResponse {
+  bool has_permission = 1;
 }
 
-message ValidateTokenResponse {
-  bool is_valid = 1;         // Флаг валидности токена
-  int64 user_id = 2;         // ID пользователя
-  string email = 3;          // Email пользователя
-  int32 app_id = 4;          // ID приложения, для которого выдан токен
-  repeated string roles = 5; // Роли пользователя
-  repeated string permissions = 6; // Разрешения пользователя
-  int64 expires_at = 7;      // Время истечения срока действия токена (Unix timestamp)
+// --- Shared Models ---
+
+message Role {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message Permission {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
 }
