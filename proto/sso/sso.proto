@@ -10,6 +10,11 @@ service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
 
+  rpc RequestPasswordReset (RequestPasswordResetRequest) returns (RequestPasswordResetResponse);
+  rpc ConfirmPasswordReset (ConfirmPasswordResetRequest) returns (ConfirmPasswordResetResponse);
+  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc Logout (LogoutRequest) returns (LogoutResponse);
+
   rpc AssignRoleToUser (AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
   rpc RevokeRoleFromUser (RevokeRoleFromUserRequest) returns (RevokeRoleFromUserResponse);
   rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesResponse);
@@ -51,6 +56,34 @@ message LoginRequest {
 message LoginResponse {
   string token = 1;
 }
+
+message RequestPasswordResetRequest {
+  string email = 1 [(buf.validate.field).string.email = true];
+}
+
+message RequestPasswordResetResponse {}
+
+message ConfirmPasswordResetRequest {
+  string email = 1 [(buf.validate.field).string.email = true];
+  string reset_token = 2 [(buf.validate.field).string.min_bytes = 1];
+  string new_password = 3 [(buf.validate.field).string.min_bytes = 6];
+}
+
+message ConfirmPasswordResetResponse {}
+
+message ChangePasswordRequest {
+  int64 user_id = 1; // Potentially removed if user ID is derived from context/token
+  string old_password = 2 [(buf.validate.field).string.min_bytes = 6];
+  string new_password = 3 [(buf.validate.field).string.min_bytes = 6];
+}
+
+message ChangePasswordResponse {}
+
+message LogoutRequest {
+  string token = 1 [(buf.validate.field).string.min_bytes = 1];
+}
+
+message LogoutResponse {}
 
 // --- Role Management Messages ---
 
