@@ -6,7 +6,7 @@ option go_package = "radahn.sso.v1;ssov1";
 
 import "buf/validate/validate.proto";
 
-service Auth {
+service AuthService {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
 

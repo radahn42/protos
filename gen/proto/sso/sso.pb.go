@@ -2406,8 +2406,8 @@ const file_proto_sso_sso_proto_rawDesc = "" +
 	"Permission\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription2\xf1\x0e\n" +
-	"\x04Auth\x129\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription2\xf8\x0e\n" +
+	"\vAuthService\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12]\n" +
 	"\x14RequestPasswordReset\x12!.auth.RequestPasswordResetRequest\x1a\".auth.RequestPasswordResetResponse\x12]\n" +
@@ -2510,54 +2510,54 @@ var file_proto_sso_sso_proto_depIdxs = []int32{
 	49, // 4: auth.GetAllPermissionsResponse.permissions:type_name -> auth.Permission
 	49, // 5: auth.GetRolePermissionsResponse.permissions:type_name -> auth.Permission
 	49, // 6: auth.GetUserPermissionsResponse.permissions:type_name -> auth.Permission
-	0,  // 7: auth.Auth.Register:input_type -> auth.RegisterRequest
-	2,  // 8: auth.Auth.Login:input_type -> auth.LoginRequest
-	4,  // 9: auth.Auth.RequestPasswordReset:input_type -> auth.RequestPasswordResetRequest
-	6,  // 10: auth.Auth.ConfirmPasswordReset:input_type -> auth.ConfirmPasswordResetRequest
-	8,  // 11: auth.Auth.ChangePassword:input_type -> auth.ChangePasswordRequest
-	10, // 12: auth.Auth.Logout:input_type -> auth.LogoutRequest
-	12, // 13: auth.Auth.AssignRoleToUser:input_type -> auth.AssignRoleToUserRequest
-	14, // 14: auth.Auth.RevokeRoleFromUser:input_type -> auth.RevokeRoleFromUserRequest
-	16, // 15: auth.Auth.GetUserRoles:input_type -> auth.GetUserRolesRequest
-	18, // 16: auth.Auth.GetAllRoles:input_type -> auth.GetAllRolesRequest
-	20, // 17: auth.Auth.CreateRole:input_type -> auth.CreateRoleRequest
-	22, // 18: auth.Auth.DeleteRole:input_type -> auth.DeleteRoleRequest
-	24, // 19: auth.Auth.UpdateRole:input_type -> auth.UpdateRoleRequest
-	46, // 20: auth.Auth.HasPermission:input_type -> auth.HasPermissionRequest
-	44, // 21: auth.Auth.GetUserPermissions:input_type -> auth.GetUserPermissionsRequest
-	26, // 22: auth.Auth.CreatePermission:input_type -> auth.CreatePermissionRequest
-	28, // 23: auth.Auth.DeletePermission:input_type -> auth.DeletePermissionRequest
-	30, // 24: auth.Auth.UpdatePermission:input_type -> auth.UpdatePermissionRequest
-	32, // 25: auth.Auth.GetPermissionByID:input_type -> auth.GetPermissionByIDRequest
-	34, // 26: auth.Auth.GetPermissionByName:input_type -> auth.GetPermissionByNameRequest
-	36, // 27: auth.Auth.GetAllPermissions:input_type -> auth.GetAllPermissionsRequest
-	38, // 28: auth.Auth.AddPermissionToRole:input_type -> auth.AddPermissionToRoleRequest
-	40, // 29: auth.Auth.RemovePermissionFromRole:input_type -> auth.RemovePermissionFromRoleRequest
-	42, // 30: auth.Auth.GetRolePermissions:input_type -> auth.GetRolePermissionsRequest
-	1,  // 31: auth.Auth.Register:output_type -> auth.RegisterResponse
-	3,  // 32: auth.Auth.Login:output_type -> auth.LoginResponse
-	5,  // 33: auth.Auth.RequestPasswordReset:output_type -> auth.RequestPasswordResetResponse
-	7,  // 34: auth.Auth.ConfirmPasswordReset:output_type -> auth.ConfirmPasswordResetResponse
-	9,  // 35: auth.Auth.ChangePassword:output_type -> auth.ChangePasswordResponse
-	11, // 36: auth.Auth.Logout:output_type -> auth.LogoutResponse
-	13, // 37: auth.Auth.AssignRoleToUser:output_type -> auth.AssignRoleToUserResponse
-	15, // 38: auth.Auth.RevokeRoleFromUser:output_type -> auth.RevokeRoleFromUserResponse
-	17, // 39: auth.Auth.GetUserRoles:output_type -> auth.GetUserRolesResponse
-	19, // 40: auth.Auth.GetAllRoles:output_type -> auth.GetAllRolesResponse
-	21, // 41: auth.Auth.CreateRole:output_type -> auth.CreateRoleResponse
-	23, // 42: auth.Auth.DeleteRole:output_type -> auth.DeleteRoleResponse
-	25, // 43: auth.Auth.UpdateRole:output_type -> auth.UpdateRoleResponse
-	47, // 44: auth.Auth.HasPermission:output_type -> auth.HasPermissionResponse
-	45, // 45: auth.Auth.GetUserPermissions:output_type -> auth.GetUserPermissionsResponse
-	27, // 46: auth.Auth.CreatePermission:output_type -> auth.CreatePermissionResponse
-	29, // 47: auth.Auth.DeletePermission:output_type -> auth.DeletePermissionResponse
-	31, // 48: auth.Auth.UpdatePermission:output_type -> auth.UpdatePermissionResponse
-	33, // 49: auth.Auth.GetPermissionByID:output_type -> auth.GetPermissionByIDResponse
-	35, // 50: auth.Auth.GetPermissionByName:output_type -> auth.GetPermissionByNameResponse
-	37, // 51: auth.Auth.GetAllPermissions:output_type -> auth.GetAllPermissionsResponse
-	39, // 52: auth.Auth.AddPermissionToRole:output_type -> auth.AddPermissionToRoleResponse
-	41, // 53: auth.Auth.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
-	43, // 54: auth.Auth.GetRolePermissions:output_type -> auth.GetRolePermissionsResponse
+	0,  // 7: auth.AuthService.Register:input_type -> auth.RegisterRequest
+	2,  // 8: auth.AuthService.Login:input_type -> auth.LoginRequest
+	4,  // 9: auth.AuthService.RequestPasswordReset:input_type -> auth.RequestPasswordResetRequest
+	6,  // 10: auth.AuthService.ConfirmPasswordReset:input_type -> auth.ConfirmPasswordResetRequest
+	8,  // 11: auth.AuthService.ChangePassword:input_type -> auth.ChangePasswordRequest
+	10, // 12: auth.AuthService.Logout:input_type -> auth.LogoutRequest
+	12, // 13: auth.AuthService.AssignRoleToUser:input_type -> auth.AssignRoleToUserRequest
+	14, // 14: auth.AuthService.RevokeRoleFromUser:input_type -> auth.RevokeRoleFromUserRequest
+	16, // 15: auth.AuthService.GetUserRoles:input_type -> auth.GetUserRolesRequest
+	18, // 16: auth.AuthService.GetAllRoles:input_type -> auth.GetAllRolesRequest
+	20, // 17: auth.AuthService.CreateRole:input_type -> auth.CreateRoleRequest
+	22, // 18: auth.AuthService.DeleteRole:input_type -> auth.DeleteRoleRequest
+	24, // 19: auth.AuthService.UpdateRole:input_type -> auth.UpdateRoleRequest
+	46, // 20: auth.AuthService.HasPermission:input_type -> auth.HasPermissionRequest
+	44, // 21: auth.AuthService.GetUserPermissions:input_type -> auth.GetUserPermissionsRequest
+	26, // 22: auth.AuthService.CreatePermission:input_type -> auth.CreatePermissionRequest
+	28, // 23: auth.AuthService.DeletePermission:input_type -> auth.DeletePermissionRequest
+	30, // 24: auth.AuthService.UpdatePermission:input_type -> auth.UpdatePermissionRequest
+	32, // 25: auth.AuthService.GetPermissionByID:input_type -> auth.GetPermissionByIDRequest
+	34, // 26: auth.AuthService.GetPermissionByName:input_type -> auth.GetPermissionByNameRequest
+	36, // 27: auth.AuthService.GetAllPermissions:input_type -> auth.GetAllPermissionsRequest
+	38, // 28: auth.AuthService.AddPermissionToRole:input_type -> auth.AddPermissionToRoleRequest
+	40, // 29: auth.AuthService.RemovePermissionFromRole:input_type -> auth.RemovePermissionFromRoleRequest
+	42, // 30: auth.AuthService.GetRolePermissions:input_type -> auth.GetRolePermissionsRequest
+	1,  // 31: auth.AuthService.Register:output_type -> auth.RegisterResponse
+	3,  // 32: auth.AuthService.Login:output_type -> auth.LoginResponse
+	5,  // 33: auth.AuthService.RequestPasswordReset:output_type -> auth.RequestPasswordResetResponse
+	7,  // 34: auth.AuthService.ConfirmPasswordReset:output_type -> auth.ConfirmPasswordResetResponse
+	9,  // 35: auth.AuthService.ChangePassword:output_type -> auth.ChangePasswordResponse
+	11, // 36: auth.AuthService.Logout:output_type -> auth.LogoutResponse
+	13, // 37: auth.AuthService.AssignRoleToUser:output_type -> auth.AssignRoleToUserResponse
+	15, // 38: auth.AuthService.RevokeRoleFromUser:output_type -> auth.RevokeRoleFromUserResponse
+	17, // 39: auth.AuthService.GetUserRoles:output_type -> auth.GetUserRolesResponse
+	19, // 40: auth.AuthService.GetAllRoles:output_type -> auth.GetAllRolesResponse
+	21, // 41: auth.AuthService.CreateRole:output_type -> auth.CreateRoleResponse
+	23, // 42: auth.AuthService.DeleteRole:output_type -> auth.DeleteRoleResponse
+	25, // 43: auth.AuthService.UpdateRole:output_type -> auth.UpdateRoleResponse
+	47, // 44: auth.AuthService.HasPermission:output_type -> auth.HasPermissionResponse
+	45, // 45: auth.AuthService.GetUserPermissions:output_type -> auth.GetUserPermissionsResponse
+	27, // 46: auth.AuthService.CreatePermission:output_type -> auth.CreatePermissionResponse
+	29, // 47: auth.AuthService.DeletePermission:output_type -> auth.DeletePermissionResponse
+	31, // 48: auth.AuthService.UpdatePermission:output_type -> auth.UpdatePermissionResponse
+	33, // 49: auth.AuthService.GetPermissionByID:output_type -> auth.GetPermissionByIDResponse
+	35, // 50: auth.AuthService.GetPermissionByName:output_type -> auth.GetPermissionByNameResponse
+	37, // 51: auth.AuthService.GetAllPermissions:output_type -> auth.GetAllPermissionsResponse
+	39, // 52: auth.AuthService.AddPermissionToRole:output_type -> auth.AddPermissionToRoleResponse
+	41, // 53: auth.AuthService.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
+	43, // 54: auth.AuthService.GetRolePermissions:output_type -> auth.GetRolePermissionsResponse
 	31, // [31:55] is the sub-list for method output_type
 	7,  // [7:31] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
