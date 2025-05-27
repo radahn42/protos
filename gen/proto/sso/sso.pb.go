@@ -400,9 +400,8 @@ func (*ConfirmPasswordResetResponse) Descriptor() ([]byte, []int) {
 
 type ChangePasswordRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // Potentially removed if user ID is derived from context/token
-	OldPassword   string                 `protobuf:"bytes,2,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
-	NewPassword   string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
+	OldPassword   string                 `protobuf:"bytes,1,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
+	NewPassword   string                 `protobuf:"bytes,2,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -435,13 +434,6 @@ func (x *ChangePasswordRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ChangePasswordRequest.ProtoReflect.Descriptor instead.
 func (*ChangePasswordRequest) Descriptor() ([]byte, []int) {
 	return file_proto_sso_sso_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *ChangePasswordRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
 }
 
 func (x *ChangePasswordRequest) GetOldPassword() string {
@@ -2166,6 +2158,110 @@ func (x *HasPermissionResponse) GetHasPermission() bool {
 	return false
 }
 
+type ValidateTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateTokenRequest) Reset() {
+	*x = ValidateTokenRequest{}
+	mi := &file_proto_sso_sso_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateTokenRequest) ProtoMessage() {}
+
+func (x *ValidateTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateTokenRequest.ProtoReflect.Descriptor instead.
+func (*ValidateTokenRequest) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *ValidateTokenRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type ValidateTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Roles         []string               `protobuf:"bytes,3,rep,name=roles,proto3" json:"roles,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateTokenResponse) Reset() {
+	*x = ValidateTokenResponse{}
+	mi := &file_proto_sso_sso_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateTokenResponse) ProtoMessage() {}
+
+func (x *ValidateTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateTokenResponse.ProtoReflect.Descriptor instead.
+func (*ValidateTokenResponse) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *ValidateTokenResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ValidateTokenResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ValidateTokenResponse) GetRoles() []string {
+	if x != nil {
+		return x.Roles
+	}
+	return nil
+}
+
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -2177,7 +2273,7 @@ type Role struct {
 
 func (x *Role) Reset() {
 	*x = Role{}
-	mi := &file_proto_sso_sso_proto_msgTypes[48]
+	mi := &file_proto_sso_sso_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2189,7 +2285,7 @@ func (x *Role) String() string {
 func (*Role) ProtoMessage() {}
 
 func (x *Role) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sso_sso_proto_msgTypes[48]
+	mi := &file_proto_sso_sso_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2202,7 +2298,7 @@ func (x *Role) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Role.ProtoReflect.Descriptor instead.
 func (*Role) Descriptor() ([]byte, []int) {
-	return file_proto_sso_sso_proto_rawDescGZIP(), []int{48}
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *Role) GetId() int64 {
@@ -2237,7 +2333,7 @@ type Permission struct {
 
 func (x *Permission) Reset() {
 	*x = Permission{}
-	mi := &file_proto_sso_sso_proto_msgTypes[49]
+	mi := &file_proto_sso_sso_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2249,7 +2345,7 @@ func (x *Permission) String() string {
 func (*Permission) ProtoMessage() {}
 
 func (x *Permission) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sso_sso_proto_msgTypes[49]
+	mi := &file_proto_sso_sso_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2262,7 +2358,7 @@ func (x *Permission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Permission.ProtoReflect.Descriptor instead.
 func (*Permission) Descriptor() ([]byte, []int) {
-	return file_proto_sso_sso_proto_rawDescGZIP(), []int{49}
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *Permission) GetId() int64 {
@@ -2310,11 +2406,10 @@ const file_proto_sso_sso_proto_rawDesc = "" +
 	"\vreset_token\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x01R\n" +
 	"resetToken\x12*\n" +
 	"\fnew_password\x18\x03 \x01(\tB\a\xbaH\x04r\x02 \x06R\vnewPassword\"\x1e\n" +
-	"\x1cConfirmPasswordResetResponse\"\x88\x01\n" +
-	"\x15ChangePasswordRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12*\n" +
-	"\fold_password\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x06R\voldPassword\x12*\n" +
-	"\fnew_password\x18\x03 \x01(\tB\a\xbaH\x04r\x02 \x06R\vnewPassword\"\x18\n" +
+	"\x1cConfirmPasswordResetResponse\"o\n" +
+	"\x15ChangePasswordRequest\x12*\n" +
+	"\fold_password\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x06R\voldPassword\x12*\n" +
+	"\fnew_password\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x06R\vnewPassword\"\x18\n" +
 	"\x16ChangePasswordResponse\".\n" +
 	"\rLogoutRequest\x12\x1d\n" +
 	"\x05token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x05token\"\x10\n" +
@@ -2397,7 +2492,13 @@ const file_proto_sso_sso_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12'\n" +
 	"\x0fpermission_name\x18\x02 \x01(\tR\x0epermissionName\">\n" +
 	"\x15HasPermissionResponse\x12%\n" +
-	"\x0ehas_permission\x18\x01 \x01(\bR\rhasPermission\"L\n" +
+	"\x0ehas_permission\x18\x01 \x01(\bR\rhasPermission\"5\n" +
+	"\x14ValidateTokenRequest\x12\x1d\n" +
+	"\x05token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x05token\"\\\n" +
+	"\x15ValidateTokenResponse\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x14\n" +
+	"\x05roles\x18\x03 \x03(\tR\x05roles\"L\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -2406,7 +2507,7 @@ const file_proto_sso_sso_proto_rawDesc = "" +
 	"Permission\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription2\xf8\x0e\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription2\xc2\x0f\n" +
 	"\vAuthService\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12]\n" +
@@ -2434,7 +2535,8 @@ const file_proto_sso_sso_proto_rawDesc = "" +
 	"\x11GetAllPermissions\x12\x1e.auth.GetAllPermissionsRequest\x1a\x1f.auth.GetAllPermissionsResponse\x12Z\n" +
 	"\x13AddPermissionToRole\x12 .auth.AddPermissionToRoleRequest\x1a!.auth.AddPermissionToRoleResponse\x12i\n" +
 	"\x18RemovePermissionFromRole\x12%.auth.RemovePermissionFromRoleRequest\x1a&.auth.RemovePermissionFromRoleResponse\x12W\n" +
-	"\x12GetRolePermissions\x12\x1f.auth.GetRolePermissionsRequest\x1a .auth.GetRolePermissionsResponseBn\n" +
+	"\x12GetRolePermissions\x12\x1f.auth.GetRolePermissionsRequest\x1a .auth.GetRolePermissionsResponse\x12H\n" +
+	"\rValidateToken\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponseBn\n" +
 	"\bcom.authB\bSsoProtoP\x01Z(github.com/radahn42/protos/gen/proto/sso\xa2\x02\x03AXX\xaa\x02\x04Auth\xca\x02\x04Auth\xe2\x02\x10Auth\\GPBMetadata\xea\x02\x04Authb\x06proto3"
 
 var (
@@ -2449,7 +2551,7 @@ func file_proto_sso_sso_proto_rawDescGZIP() []byte {
 	return file_proto_sso_sso_proto_rawDescData
 }
 
-var file_proto_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
+var file_proto_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_proto_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),                  // 0: auth.RegisterRequest
 	(*RegisterResponse)(nil),                 // 1: auth.RegisterResponse
@@ -2499,17 +2601,19 @@ var file_proto_sso_sso_proto_goTypes = []any{
 	(*GetUserPermissionsResponse)(nil),       // 45: auth.GetUserPermissionsResponse
 	(*HasPermissionRequest)(nil),             // 46: auth.HasPermissionRequest
 	(*HasPermissionResponse)(nil),            // 47: auth.HasPermissionResponse
-	(*Role)(nil),                             // 48: auth.Role
-	(*Permission)(nil),                       // 49: auth.Permission
+	(*ValidateTokenRequest)(nil),             // 48: auth.ValidateTokenRequest
+	(*ValidateTokenResponse)(nil),            // 49: auth.ValidateTokenResponse
+	(*Role)(nil),                             // 50: auth.Role
+	(*Permission)(nil),                       // 51: auth.Permission
 }
 var file_proto_sso_sso_proto_depIdxs = []int32{
-	48, // 0: auth.GetUserRolesResponse.roles:type_name -> auth.Role
-	48, // 1: auth.GetAllRolesResponse.roles:type_name -> auth.Role
-	49, // 2: auth.GetPermissionByIDResponse.permission:type_name -> auth.Permission
-	49, // 3: auth.GetPermissionByNameResponse.permission:type_name -> auth.Permission
-	49, // 4: auth.GetAllPermissionsResponse.permissions:type_name -> auth.Permission
-	49, // 5: auth.GetRolePermissionsResponse.permissions:type_name -> auth.Permission
-	49, // 6: auth.GetUserPermissionsResponse.permissions:type_name -> auth.Permission
+	50, // 0: auth.GetUserRolesResponse.roles:type_name -> auth.Role
+	50, // 1: auth.GetAllRolesResponse.roles:type_name -> auth.Role
+	51, // 2: auth.GetPermissionByIDResponse.permission:type_name -> auth.Permission
+	51, // 3: auth.GetPermissionByNameResponse.permission:type_name -> auth.Permission
+	51, // 4: auth.GetAllPermissionsResponse.permissions:type_name -> auth.Permission
+	51, // 5: auth.GetRolePermissionsResponse.permissions:type_name -> auth.Permission
+	51, // 6: auth.GetUserPermissionsResponse.permissions:type_name -> auth.Permission
 	0,  // 7: auth.AuthService.Register:input_type -> auth.RegisterRequest
 	2,  // 8: auth.AuthService.Login:input_type -> auth.LoginRequest
 	4,  // 9: auth.AuthService.RequestPasswordReset:input_type -> auth.RequestPasswordResetRequest
@@ -2534,32 +2638,34 @@ var file_proto_sso_sso_proto_depIdxs = []int32{
 	38, // 28: auth.AuthService.AddPermissionToRole:input_type -> auth.AddPermissionToRoleRequest
 	40, // 29: auth.AuthService.RemovePermissionFromRole:input_type -> auth.RemovePermissionFromRoleRequest
 	42, // 30: auth.AuthService.GetRolePermissions:input_type -> auth.GetRolePermissionsRequest
-	1,  // 31: auth.AuthService.Register:output_type -> auth.RegisterResponse
-	3,  // 32: auth.AuthService.Login:output_type -> auth.LoginResponse
-	5,  // 33: auth.AuthService.RequestPasswordReset:output_type -> auth.RequestPasswordResetResponse
-	7,  // 34: auth.AuthService.ConfirmPasswordReset:output_type -> auth.ConfirmPasswordResetResponse
-	9,  // 35: auth.AuthService.ChangePassword:output_type -> auth.ChangePasswordResponse
-	11, // 36: auth.AuthService.Logout:output_type -> auth.LogoutResponse
-	13, // 37: auth.AuthService.AssignRoleToUser:output_type -> auth.AssignRoleToUserResponse
-	15, // 38: auth.AuthService.RevokeRoleFromUser:output_type -> auth.RevokeRoleFromUserResponse
-	17, // 39: auth.AuthService.GetUserRoles:output_type -> auth.GetUserRolesResponse
-	19, // 40: auth.AuthService.GetAllRoles:output_type -> auth.GetAllRolesResponse
-	21, // 41: auth.AuthService.CreateRole:output_type -> auth.CreateRoleResponse
-	23, // 42: auth.AuthService.DeleteRole:output_type -> auth.DeleteRoleResponse
-	25, // 43: auth.AuthService.UpdateRole:output_type -> auth.UpdateRoleResponse
-	47, // 44: auth.AuthService.HasPermission:output_type -> auth.HasPermissionResponse
-	45, // 45: auth.AuthService.GetUserPermissions:output_type -> auth.GetUserPermissionsResponse
-	27, // 46: auth.AuthService.CreatePermission:output_type -> auth.CreatePermissionResponse
-	29, // 47: auth.AuthService.DeletePermission:output_type -> auth.DeletePermissionResponse
-	31, // 48: auth.AuthService.UpdatePermission:output_type -> auth.UpdatePermissionResponse
-	33, // 49: auth.AuthService.GetPermissionByID:output_type -> auth.GetPermissionByIDResponse
-	35, // 50: auth.AuthService.GetPermissionByName:output_type -> auth.GetPermissionByNameResponse
-	37, // 51: auth.AuthService.GetAllPermissions:output_type -> auth.GetAllPermissionsResponse
-	39, // 52: auth.AuthService.AddPermissionToRole:output_type -> auth.AddPermissionToRoleResponse
-	41, // 53: auth.AuthService.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
-	43, // 54: auth.AuthService.GetRolePermissions:output_type -> auth.GetRolePermissionsResponse
-	31, // [31:55] is the sub-list for method output_type
-	7,  // [7:31] is the sub-list for method input_type
+	48, // 31: auth.AuthService.ValidateToken:input_type -> auth.ValidateTokenRequest
+	1,  // 32: auth.AuthService.Register:output_type -> auth.RegisterResponse
+	3,  // 33: auth.AuthService.Login:output_type -> auth.LoginResponse
+	5,  // 34: auth.AuthService.RequestPasswordReset:output_type -> auth.RequestPasswordResetResponse
+	7,  // 35: auth.AuthService.ConfirmPasswordReset:output_type -> auth.ConfirmPasswordResetResponse
+	9,  // 36: auth.AuthService.ChangePassword:output_type -> auth.ChangePasswordResponse
+	11, // 37: auth.AuthService.Logout:output_type -> auth.LogoutResponse
+	13, // 38: auth.AuthService.AssignRoleToUser:output_type -> auth.AssignRoleToUserResponse
+	15, // 39: auth.AuthService.RevokeRoleFromUser:output_type -> auth.RevokeRoleFromUserResponse
+	17, // 40: auth.AuthService.GetUserRoles:output_type -> auth.GetUserRolesResponse
+	19, // 41: auth.AuthService.GetAllRoles:output_type -> auth.GetAllRolesResponse
+	21, // 42: auth.AuthService.CreateRole:output_type -> auth.CreateRoleResponse
+	23, // 43: auth.AuthService.DeleteRole:output_type -> auth.DeleteRoleResponse
+	25, // 44: auth.AuthService.UpdateRole:output_type -> auth.UpdateRoleResponse
+	47, // 45: auth.AuthService.HasPermission:output_type -> auth.HasPermissionResponse
+	45, // 46: auth.AuthService.GetUserPermissions:output_type -> auth.GetUserPermissionsResponse
+	27, // 47: auth.AuthService.CreatePermission:output_type -> auth.CreatePermissionResponse
+	29, // 48: auth.AuthService.DeletePermission:output_type -> auth.DeletePermissionResponse
+	31, // 49: auth.AuthService.UpdatePermission:output_type -> auth.UpdatePermissionResponse
+	33, // 50: auth.AuthService.GetPermissionByID:output_type -> auth.GetPermissionByIDResponse
+	35, // 51: auth.AuthService.GetPermissionByName:output_type -> auth.GetPermissionByNameResponse
+	37, // 52: auth.AuthService.GetAllPermissions:output_type -> auth.GetAllPermissionsResponse
+	39, // 53: auth.AuthService.AddPermissionToRole:output_type -> auth.AddPermissionToRoleResponse
+	41, // 54: auth.AuthService.RemovePermissionFromRole:output_type -> auth.RemovePermissionFromRoleResponse
+	43, // 55: auth.AuthService.GetRolePermissions:output_type -> auth.GetRolePermissionsResponse
+	49, // 56: auth.AuthService.ValidateToken:output_type -> auth.ValidateTokenResponse
+	32, // [32:57] is the sub-list for method output_type
+	7,  // [7:32] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -2576,7 +2682,7 @@ func file_proto_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_sso_sso_proto_rawDesc), len(file_proto_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   50,
+			NumMessages:   52,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -34,6 +34,8 @@ service AuthService {
   rpc AddPermissionToRole (AddPermissionToRoleRequest) returns (AddPermissionToRoleResponse);
   rpc RemovePermissionFromRole (RemovePermissionFromRoleRequest) returns (RemovePermissionFromRoleResponse);
   rpc GetRolePermissions (GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
+
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
 }
 
 // --- User Authentication Messages ---
@@ -72,9 +74,8 @@ message ConfirmPasswordResetRequest {
 message ConfirmPasswordResetResponse {}
 
 message ChangePasswordRequest {
-  int64 user_id = 1; // Potentially removed if user ID is derived from context/token
-  string old_password = 2 [(buf.validate.field).string.min_bytes = 6];
-  string new_password = 3 [(buf.validate.field).string.min_bytes = 6];
+  string old_password = 1 [(buf.validate.field).string.min_bytes = 6];
+  string new_password = 2 [(buf.validate.field).string.min_bytes = 6];
 }
 
 message ChangePasswordResponse {}
@@ -223,6 +224,16 @@ message HasPermissionRequest {
 
 message HasPermissionResponse {
   bool has_permission = 1;
+}
+
+message ValidateTokenRequest {
+  string token = 1 [(buf.validate.field).string.min_bytes = 1];
+}
+
+message ValidateTokenResponse {
+  int64 user_id = 1;
+  string email = 2;
+  repeated string roles = 3;
 }
 
 // --- Shared Models ---
