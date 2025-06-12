@@ -36,6 +36,7 @@ service AuthService {
   rpc GetRolePermissions (GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
 
   rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc RefreshTokens (RefreshTokensRequest) returns (RefreshTokensResponse);
 }
 
 // --- User Authentication Messages ---
@@ -234,6 +235,16 @@ message ValidateTokenResponse {
   int64 user_id = 1;
   string email = 2;
   repeated string roles = 3;
+}
+
+message RefreshTokensRequest {
+  string refresh_token = 1 [(buf.validate.field).string.min_bytes = 10];
+  int32 app_id = 2 [(buf.validate.field).int32.gt = 0];
+}
+
+message RefreshTokensResponse {
+  string access_token = 1;
+  string refresh_token = 2;
 }
 
 // --- Shared Models ---
