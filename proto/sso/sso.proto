@@ -269,7 +269,9 @@ message ValidateTokenResponse {
 
 message RefreshTokensRequest {
   string refresh_token = 1 [(buf.validate.field).string.min_bytes = 30];
-  int32 app_id = 2 [(buf.validate.field).int32.gt = 0];
+  App app = 2;
+  User user = 3;
+  repeated string roles = 4;
 }
 
 message RefreshTokensResponse {
