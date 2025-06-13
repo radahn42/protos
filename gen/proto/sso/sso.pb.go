@@ -2366,6 +2366,126 @@ func (x *RefreshTokensResponse) GetRefreshToken() string {
 	return ""
 }
 
+type App struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Secret        string                 `protobuf:"bytes,3,opt,name=secret,proto3" json:"secret,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *App) Reset() {
+	*x = App{}
+	mi := &file_proto_sso_sso_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *App) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*App) ProtoMessage() {}
+
+func (x *App) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use App.ProtoReflect.Descriptor instead.
+func (*App) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *App) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *App) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *App) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	PassHash      []byte                 `protobuf:"bytes,3,opt,name=pass_hash,json=passHash,proto3" json:"pass_hash,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_proto_sso_sso_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_sso_sso_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *User) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *User) GetPassHash() []byte {
+	if x != nil {
+		return x.PassHash
+	}
+	return nil
+}
+
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -2377,7 +2497,7 @@ type Role struct {
 
 func (x *Role) Reset() {
 	*x = Role{}
-	mi := &file_proto_sso_sso_proto_msgTypes[52]
+	mi := &file_proto_sso_sso_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2389,7 +2509,7 @@ func (x *Role) String() string {
 func (*Role) ProtoMessage() {}
 
 func (x *Role) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sso_sso_proto_msgTypes[52]
+	mi := &file_proto_sso_sso_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2402,7 +2522,7 @@ func (x *Role) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Role.ProtoReflect.Descriptor instead.
 func (*Role) Descriptor() ([]byte, []int) {
-	return file_proto_sso_sso_proto_rawDescGZIP(), []int{52}
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *Role) GetId() int64 {
@@ -2437,7 +2557,7 @@ type Permission struct {
 
 func (x *Permission) Reset() {
 	*x = Permission{}
-	mi := &file_proto_sso_sso_proto_msgTypes[53]
+	mi := &file_proto_sso_sso_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2449,7 +2569,7 @@ func (x *Permission) String() string {
 func (*Permission) ProtoMessage() {}
 
 func (x *Permission) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sso_sso_proto_msgTypes[53]
+	mi := &file_proto_sso_sso_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2462,7 +2582,7 @@ func (x *Permission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Permission.ProtoReflect.Descriptor instead.
 func (*Permission) Descriptor() ([]byte, []int) {
-	return file_proto_sso_sso_proto_rawDescGZIP(), []int{53}
+	return file_proto_sso_sso_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *Permission) GetId() int64 {
@@ -2490,126 +2610,133 @@ var File_proto_sso_sso_proto protoreflect.FileDescriptor
 
 const file_proto_sso_sso_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/sso/sso.proto\x12\x04auth\x1a\x1bbuf/validate/validate.proto\"U\n" +
-	"\x0fRegisterRequest\x12\x1d\n" +
-	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12#\n" +
-	"\bpassword\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x06R\bpassword\"+\n" +
+	"\x13proto/sso/sso.proto\x12\x04auth\x1a\x1bbuf/validate/validate.proto\"Y\n" +
+	"\x0fRegisterRequest\x12\x1f\n" +
+	"\x05email\x18\x01 \x01(\tB\t\xbaH\x06r\x04 \x05`\x01R\x05email\x12%\n" +
+	"\bpassword\x18\x02 \x01(\tB\t\xbaH\x06r\x04 \b(@R\bpassword\"+\n" +
 	"\x10RegisterResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"i\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"r\n" +
 	"\fLoginRequest\x12\x1d\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12#\n" +
-	"\bpassword\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x06R\bpassword\x12\x15\n" +
-	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"%\n" +
+	"\bpassword\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \bR\bpassword\x12\x1e\n" +
+	"\x06app_id\x18\x03 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\x05appId\"%\n" +
 	"\rLoginResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"<\n" +
 	"\x1bRequestPasswordResetRequest\x12\x1d\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\"\x1e\n" +
-	"\x1cRequestPasswordResetResponse\"\x92\x01\n" +
+	"\x1cRequestPasswordResetResponse\"\x94\x01\n" +
 	"\x1bConfirmPasswordResetRequest\x12\x1d\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12(\n" +
-	"\vreset_token\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x01R\n" +
-	"resetToken\x12*\n" +
-	"\fnew_password\x18\x03 \x01(\tB\a\xbaH\x04r\x02 \x06R\vnewPassword\"\x1e\n" +
-	"\x1cConfirmPasswordResetResponse\"o\n" +
+	"\vreset_token\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x14R\n" +
+	"resetToken\x12,\n" +
+	"\fnew_password\x18\x03 \x01(\tB\t\xbaH\x06r\x04 \b(@R\vnewPassword\"\x1e\n" +
+	"\x1cConfirmPasswordResetResponse\"q\n" +
 	"\x15ChangePasswordRequest\x12*\n" +
-	"\fold_password\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x06R\voldPassword\x12*\n" +
-	"\fnew_password\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x06R\vnewPassword\"\x18\n" +
+	"\fold_password\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \bR\voldPassword\x12,\n" +
+	"\fnew_password\x18\x02 \x01(\tB\t\xbaH\x06r\x04 \b(@R\vnewPassword\"\x18\n" +
 	"\x16ChangePasswordResponse\".\n" +
 	"\rLogoutRequest\x12\x1d\n" +
-	"\x05token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x05token\"\x10\n" +
-	"\x0eLogoutResponse\"K\n" +
-	"\x17AssignRoleToUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\arole_id\x18\x02 \x01(\x03R\x06roleId\"\x1a\n" +
-	"\x18AssignRoleToUserResponse\"M\n" +
-	"\x19RevokeRoleFromUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\arole_id\x18\x02 \x01(\x03R\x06roleId\"\x1c\n" +
-	"\x1aRevokeRoleFromUserResponse\".\n" +
-	"\x13GetUserRolesRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"8\n" +
+	"\x05token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x14R\x05token\"\x10\n" +
+	"\x0eLogoutResponse\"]\n" +
+	"\x17AssignRoleToUserRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06userId\x12 \n" +
+	"\arole_id\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\"\x1a\n" +
+	"\x18AssignRoleToUserResponse\"_\n" +
+	"\x19RevokeRoleFromUserRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06userId\x12 \n" +
+	"\arole_id\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\"\x1c\n" +
+	"\x1aRevokeRoleFromUserResponse\"7\n" +
+	"\x13GetUserRolesRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06userId\"8\n" +
 	"\x14GetUserRolesResponse\x12 \n" +
 	"\x05roles\x18\x01 \x03(\v2\n" +
 	".auth.RoleR\x05roles\"\x14\n" +
 	"\x12GetAllRolesRequest\"7\n" +
 	"\x13GetAllRolesResponse\x12 \n" +
 	"\x05roles\x18\x01 \x03(\v2\n" +
-	".auth.RoleR\x05roles\"R\n" +
-	"\x11CreateRoleRequest\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\"-\n" +
+	".auth.RoleR\x05roles\"i\n" +
+	"\x11CreateRoleRequest\x12(\n" +
+	"\x04name\x18\x01 \x01(\tB\x14\xbaH\x11r\x0f \x03(22\t^[a-z_]+$R\x04name\x12*\n" +
+	"\vdescription\x18\x02 \x01(\tB\b\xbaH\x05r\x03(\xff\x01R\vdescription\"-\n" +
 	"\x12CreateRoleResponse\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\",\n" +
-	"\x11DeleteRoleRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\"\x14\n" +
-	"\x12DeleteRoleResponse\"b\n" +
-	"\x11UpdateRoleRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\"\x14\n" +
-	"\x12UpdateRoleResponse\"X\n" +
-	"\x17CreatePermissionRequest\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\"?\n" +
+	"\arole_id\x18\x01 \x01(\x03R\x06roleId\"5\n" +
+	"\x11DeleteRoleRequest\x12 \n" +
+	"\arole_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\"\x14\n" +
+	"\x12DeleteRoleResponse\"\x8b\x01\n" +
+	"\x11UpdateRoleRequest\x12 \n" +
+	"\arole_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\x12(\n" +
+	"\x04name\x18\x02 \x01(\tB\x14\xbaH\x11r\x0f \x03(22\t^[a-z_]+$R\x04name\x12*\n" +
+	"\vdescription\x18\x03 \x01(\tB\b\xbaH\x05r\x03(\xff\x01R\vdescription\"\x14\n" +
+	"\x12UpdateRoleResponse\"o\n" +
+	"\x17CreatePermissionRequest\x12(\n" +
+	"\x04name\x18\x01 \x01(\tB\x14\xbaH\x11r\x0f \x03(22\t^[a-z_]+$R\x04name\x12*\n" +
+	"\vdescription\x18\x02 \x01(\tB\b\xbaH\x05r\x03(\xff\x01R\vdescription\"?\n" +
 	"\x18CreatePermissionResponse\x12#\n" +
-	"\rpermission_id\x18\x01 \x01(\x03R\fpermissionId\">\n" +
-	"\x17DeletePermissionRequest\x12#\n" +
-	"\rpermission_id\x18\x01 \x01(\x03R\fpermissionId\"\x1a\n" +
-	"\x18DeletePermissionResponse\"t\n" +
-	"\x17UpdatePermissionRequest\x12#\n" +
-	"\rpermission_id\x18\x01 \x01(\x03R\fpermissionId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\"\x1a\n" +
-	"\x18UpdatePermissionResponse\"?\n" +
-	"\x18GetPermissionByIDRequest\x12#\n" +
-	"\rpermission_id\x18\x01 \x01(\x03R\fpermissionId\"M\n" +
+	"\rpermission_id\x18\x01 \x01(\x03R\fpermissionId\"G\n" +
+	"\x17DeletePermissionRequest\x12,\n" +
+	"\rpermission_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\fpermissionId\"\x1a\n" +
+	"\x18DeletePermissionResponse\"\x9d\x01\n" +
+	"\x17UpdatePermissionRequest\x12,\n" +
+	"\rpermission_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\fpermissionId\x12(\n" +
+	"\x04name\x18\x02 \x01(\tB\x14\xbaH\x11r\x0f \x03(22\t^[a-z_]+$R\x04name\x12*\n" +
+	"\vdescription\x18\x03 \x01(\tB\b\xbaH\x05r\x03(\xff\x01R\vdescription\"\x1a\n" +
+	"\x18UpdatePermissionResponse\"H\n" +
+	"\x18GetPermissionByIDRequest\x12,\n" +
+	"\rpermission_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\fpermissionId\"M\n" +
 	"\x19GetPermissionByIDResponse\x120\n" +
 	"\n" +
 	"permission\x18\x01 \x01(\v2\x10.auth.PermissionR\n" +
-	"permission\"9\n" +
-	"\x1aGetPermissionByNameRequest\x12\x1b\n" +
-	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x04name\"O\n" +
+	"permission\";\n" +
+	"\x1aGetPermissionByNameRequest\x12\x1d\n" +
+	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04 \x03(2R\x04name\"O\n" +
 	"\x1bGetPermissionByNameResponse\x120\n" +
 	"\n" +
 	"permission\x18\x01 \x01(\v2\x10.auth.PermissionR\n" +
 	"permission\"\x1a\n" +
 	"\x18GetAllPermissionsRequest\"O\n" +
 	"\x19GetAllPermissionsResponse\x122\n" +
-	"\vpermissions\x18\x01 \x03(\v2\x10.auth.PermissionR\vpermissions\"Z\n" +
-	"\x1aAddPermissionToRoleRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12#\n" +
-	"\rpermission_id\x18\x02 \x01(\x03R\fpermissionId\"\x1d\n" +
-	"\x1bAddPermissionToRoleResponse\"_\n" +
-	"\x1fRemovePermissionFromRoleRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12#\n" +
-	"\rpermission_id\x18\x02 \x01(\x03R\fpermissionId\"\"\n" +
-	" RemovePermissionFromRoleResponse\"4\n" +
-	"\x19GetRolePermissionsRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\"P\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x10.auth.PermissionR\vpermissions\"l\n" +
+	"\x1aAddPermissionToRoleRequest\x12 \n" +
+	"\arole_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\x12,\n" +
+	"\rpermission_id\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\fpermissionId\"\x1d\n" +
+	"\x1bAddPermissionToRoleResponse\"q\n" +
+	"\x1fRemovePermissionFromRoleRequest\x12 \n" +
+	"\arole_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\x12,\n" +
+	"\rpermission_id\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\fpermissionId\"\"\n" +
+	" RemovePermissionFromRoleResponse\"=\n" +
+	"\x19GetRolePermissionsRequest\x12 \n" +
+	"\arole_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06roleId\"P\n" +
 	"\x1aGetRolePermissionsResponse\x122\n" +
-	"\vpermissions\x18\x01 \x03(\v2\x10.auth.PermissionR\vpermissions\"4\n" +
-	"\x19GetUserPermissionsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"P\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x10.auth.PermissionR\vpermissions\"=\n" +
+	"\x19GetUserPermissionsRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06userId\"P\n" +
 	"\x1aGetUserPermissionsResponse\x122\n" +
-	"\vpermissions\x18\x01 \x03(\v2\x10.auth.PermissionR\vpermissions\"X\n" +
-	"\x14HasPermissionRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12'\n" +
-	"\x0fpermission_name\x18\x02 \x01(\tR\x0epermissionName\">\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x10.auth.PermissionR\vpermissions\"j\n" +
+	"\x14HasPermissionRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x06userId\x120\n" +
+	"\x0fpermission_name\x18\x02 \x01(\tB\a\xbaH\x04r\x02 \x03R\x0epermissionName\">\n" +
 	"\x15HasPermissionResponse\x12%\n" +
 	"\x0ehas_permission\x18\x01 \x01(\bR\rhasPermission\"5\n" +
 	"\x14ValidateTokenRequest\x12\x1d\n" +
-	"\x05token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x01R\x05token\"\\\n" +
+	"\x05token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x14R\x05token\"\\\n" +
 	"\x15ValidateTokenResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x14\n" +
 	"\x05roles\x18\x03 \x03(\tR\x05roles\"d\n" +
 	"\x14RefreshTokensRequest\x12,\n" +
-	"\rrefresh_token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \n" +
-	"R\frefreshToken\x12\x1e\n" +
+	"\rrefresh_token\x18\x01 \x01(\tB\a\xbaH\x04r\x02 \x1eR\frefreshToken\x12\x1e\n" +
 	"\x06app_id\x18\x02 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\x05appId\"_\n" +
 	"\x15RefreshTokensResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"L\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"A\n" +
+	"\x03App\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
+	"\x06secret\x18\x03 \x01(\tR\x06secret\"I\n" +
+	"\x04User\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1b\n" +
+	"\tpass_hash\x18\x03 \x01(\fR\bpassHash\"L\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -2663,7 +2790,7 @@ func file_proto_sso_sso_proto_rawDescGZIP() []byte {
 	return file_proto_sso_sso_proto_rawDescData
 }
 
-var file_proto_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_proto_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_proto_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),                  // 0: auth.RegisterRequest
 	(*RegisterResponse)(nil),                 // 1: auth.RegisterResponse
@@ -2717,17 +2844,19 @@ var file_proto_sso_sso_proto_goTypes = []any{
 	(*ValidateTokenResponse)(nil),            // 49: auth.ValidateTokenResponse
 	(*RefreshTokensRequest)(nil),             // 50: auth.RefreshTokensRequest
 	(*RefreshTokensResponse)(nil),            // 51: auth.RefreshTokensResponse
-	(*Role)(nil),                             // 52: auth.Role
-	(*Permission)(nil),                       // 53: auth.Permission
+	(*App)(nil),                              // 52: auth.App
+	(*User)(nil),                             // 53: auth.User
+	(*Role)(nil),                             // 54: auth.Role
+	(*Permission)(nil),                       // 55: auth.Permission
 }
 var file_proto_sso_sso_proto_depIdxs = []int32{
-	52, // 0: auth.GetUserRolesResponse.roles:type_name -> auth.Role
-	52, // 1: auth.GetAllRolesResponse.roles:type_name -> auth.Role
-	53, // 2: auth.GetPermissionByIDResponse.permission:type_name -> auth.Permission
-	53, // 3: auth.GetPermissionByNameResponse.permission:type_name -> auth.Permission
-	53, // 4: auth.GetAllPermissionsResponse.permissions:type_name -> auth.Permission
-	53, // 5: auth.GetRolePermissionsResponse.permissions:type_name -> auth.Permission
-	53, // 6: auth.GetUserPermissionsResponse.permissions:type_name -> auth.Permission
+	54, // 0: auth.GetUserRolesResponse.roles:type_name -> auth.Role
+	54, // 1: auth.GetAllRolesResponse.roles:type_name -> auth.Role
+	55, // 2: auth.GetPermissionByIDResponse.permission:type_name -> auth.Permission
+	55, // 3: auth.GetPermissionByNameResponse.permission:type_name -> auth.Permission
+	55, // 4: auth.GetAllPermissionsResponse.permissions:type_name -> auth.Permission
+	55, // 5: auth.GetRolePermissionsResponse.permissions:type_name -> auth.Permission
+	55, // 6: auth.GetUserPermissionsResponse.permissions:type_name -> auth.Permission
 	0,  // 7: auth.AuthService.Register:input_type -> auth.RegisterRequest
 	2,  // 8: auth.AuthService.Login:input_type -> auth.LoginRequest
 	4,  // 9: auth.AuthService.RequestPasswordReset:input_type -> auth.RequestPasswordResetRequest
@@ -2798,7 +2927,7 @@ func file_proto_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_sso_sso_proto_rawDesc), len(file_proto_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   54,
+			NumMessages:   56,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
