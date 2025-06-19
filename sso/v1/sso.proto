@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package auth;
+package sso.v1;
 
 option go_package = "radahn.sso.v1;ssov1";
 
@@ -270,9 +270,6 @@ message ValidateTokenResponse {
 
 message RefreshTokensRequest {
   string refresh_token = 1 [(buf.validate.field).string.min_bytes = 30];
-  int32 app_id = 2 [(buf.validate.field).int32.gt = 0];
-  int64 user_id = 3 [(buf.validate.field).int64.gt = 0];
-  repeated string roles = 4;
 }
 
 message RefreshTokensResponse {

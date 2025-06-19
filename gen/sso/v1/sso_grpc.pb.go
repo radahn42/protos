@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: proto/sso/sso.proto
+// source: sso/v1/sso.proto
 
-package sso
+package ssov1
 
 import (
 	context "context"
@@ -19,32 +19,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_Register_FullMethodName                 = "/auth.AuthService/Register"
-	AuthService_Login_FullMethodName                    = "/auth.AuthService/Login"
-	AuthService_RequestPasswordReset_FullMethodName     = "/auth.AuthService/RequestPasswordReset"
-	AuthService_ConfirmPasswordReset_FullMethodName     = "/auth.AuthService/ConfirmPasswordReset"
-	AuthService_ChangePassword_FullMethodName           = "/auth.AuthService/ChangePassword"
-	AuthService_Logout_FullMethodName                   = "/auth.AuthService/Logout"
-	AuthService_AssignRoleToUser_FullMethodName         = "/auth.AuthService/AssignRoleToUser"
-	AuthService_RevokeRoleFromUser_FullMethodName       = "/auth.AuthService/RevokeRoleFromUser"
-	AuthService_GetUserRoles_FullMethodName             = "/auth.AuthService/GetUserRoles"
-	AuthService_GetAllRoles_FullMethodName              = "/auth.AuthService/GetAllRoles"
-	AuthService_CreateRole_FullMethodName               = "/auth.AuthService/CreateRole"
-	AuthService_DeleteRole_FullMethodName               = "/auth.AuthService/DeleteRole"
-	AuthService_UpdateRole_FullMethodName               = "/auth.AuthService/UpdateRole"
-	AuthService_HasPermission_FullMethodName            = "/auth.AuthService/HasPermission"
-	AuthService_GetUserPermissions_FullMethodName       = "/auth.AuthService/GetUserPermissions"
-	AuthService_CreatePermission_FullMethodName         = "/auth.AuthService/CreatePermission"
-	AuthService_DeletePermission_FullMethodName         = "/auth.AuthService/DeletePermission"
-	AuthService_UpdatePermission_FullMethodName         = "/auth.AuthService/UpdatePermission"
-	AuthService_GetPermissionByID_FullMethodName        = "/auth.AuthService/GetPermissionByID"
-	AuthService_GetPermissionByName_FullMethodName      = "/auth.AuthService/GetPermissionByName"
-	AuthService_GetAllPermissions_FullMethodName        = "/auth.AuthService/GetAllPermissions"
-	AuthService_AddPermissionToRole_FullMethodName      = "/auth.AuthService/AddPermissionToRole"
-	AuthService_RemovePermissionFromRole_FullMethodName = "/auth.AuthService/RemovePermissionFromRole"
-	AuthService_GetRolePermissions_FullMethodName       = "/auth.AuthService/GetRolePermissions"
-	AuthService_ValidateToken_FullMethodName            = "/auth.AuthService/ValidateToken"
-	AuthService_RefreshTokens_FullMethodName            = "/auth.AuthService/RefreshTokens"
+	AuthService_Register_FullMethodName                 = "/sso.v1.AuthService/Register"
+	AuthService_Login_FullMethodName                    = "/sso.v1.AuthService/Login"
+	AuthService_RequestPasswordReset_FullMethodName     = "/sso.v1.AuthService/RequestPasswordReset"
+	AuthService_ConfirmPasswordReset_FullMethodName     = "/sso.v1.AuthService/ConfirmPasswordReset"
+	AuthService_ChangePassword_FullMethodName           = "/sso.v1.AuthService/ChangePassword"
+	AuthService_Logout_FullMethodName                   = "/sso.v1.AuthService/Logout"
+	AuthService_AssignRoleToUser_FullMethodName         = "/sso.v1.AuthService/AssignRoleToUser"
+	AuthService_RevokeRoleFromUser_FullMethodName       = "/sso.v1.AuthService/RevokeRoleFromUser"
+	AuthService_GetUserRoles_FullMethodName             = "/sso.v1.AuthService/GetUserRoles"
+	AuthService_GetAllRoles_FullMethodName              = "/sso.v1.AuthService/GetAllRoles"
+	AuthService_CreateRole_FullMethodName               = "/sso.v1.AuthService/CreateRole"
+	AuthService_DeleteRole_FullMethodName               = "/sso.v1.AuthService/DeleteRole"
+	AuthService_UpdateRole_FullMethodName               = "/sso.v1.AuthService/UpdateRole"
+	AuthService_HasPermission_FullMethodName            = "/sso.v1.AuthService/HasPermission"
+	AuthService_GetUserPermissions_FullMethodName       = "/sso.v1.AuthService/GetUserPermissions"
+	AuthService_CreatePermission_FullMethodName         = "/sso.v1.AuthService/CreatePermission"
+	AuthService_DeletePermission_FullMethodName         = "/sso.v1.AuthService/DeletePermission"
+	AuthService_UpdatePermission_FullMethodName         = "/sso.v1.AuthService/UpdatePermission"
+	AuthService_GetPermissionByID_FullMethodName        = "/sso.v1.AuthService/GetPermissionByID"
+	AuthService_GetPermissionByName_FullMethodName      = "/sso.v1.AuthService/GetPermissionByName"
+	AuthService_GetAllPermissions_FullMethodName        = "/sso.v1.AuthService/GetAllPermissions"
+	AuthService_AddPermissionToRole_FullMethodName      = "/sso.v1.AuthService/AddPermissionToRole"
+	AuthService_RemovePermissionFromRole_FullMethodName = "/sso.v1.AuthService/RemovePermissionFromRole"
+	AuthService_GetRolePermissions_FullMethodName       = "/sso.v1.AuthService/GetRolePermissions"
+	AuthService_ValidateToken_FullMethodName            = "/sso.v1.AuthService/ValidateToken"
+	AuthService_RefreshTokens_FullMethodName            = "/sso.v1.AuthService/RefreshTokens"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -958,7 +958,7 @@ func _AuthService_RefreshTokens_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.AuthService",
+	ServiceName: "sso.v1.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1067,5 +1067,5 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/sso/sso.proto",
+	Metadata: "sso/v1/sso.proto",
 }
