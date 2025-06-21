@@ -2,52 +2,52 @@ syntax = "proto3";
 
 package sso.v1;
 
-option go_package = "radahn.sso.v1;ssov1";
-
 import "buf/validate/validate.proto";
 
+option go_package = "radahn.sso.v1;ssov1";
+
 service AuthService {
-  rpc Register (RegisterRequest) returns (RegisterResponse);
-  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
 
-  rpc RequestPasswordReset (RequestPasswordResetRequest) returns (RequestPasswordResetResponse);
-  rpc ConfirmPasswordReset (ConfirmPasswordResetRequest) returns (ConfirmPasswordResetResponse);
-  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse);
-  rpc Logout (LogoutRequest) returns (LogoutResponse);
+  rpc RequestPasswordReset(RequestPasswordResetRequest) returns (RequestPasswordResetResponse);
+  rpc ConfirmPasswordReset(ConfirmPasswordResetRequest) returns (ConfirmPasswordResetResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
 
-  rpc AssignRoleToUser (AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
-  rpc RevokeRoleFromUser (RevokeRoleFromUserRequest) returns (RevokeRoleFromUserResponse);
-  rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesResponse);
-  rpc GetAllRoles (GetAllRolesRequest) returns (GetAllRolesResponse);
-  rpc CreateRole (CreateRoleRequest) returns (CreateRoleResponse);
-  rpc DeleteRole (DeleteRoleRequest) returns (DeleteRoleResponse);
-  rpc UpdateRole (UpdateRoleRequest) returns (UpdateRoleResponse);
+  rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
+  rpc RevokeRoleFromUser(RevokeRoleFromUserRequest) returns (RevokeRoleFromUserResponse);
+  rpc GetUserRoles(GetUserRolesRequest) returns (GetUserRolesResponse);
+  rpc GetAllRoles(GetAllRolesRequest) returns (GetAllRolesResponse);
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
 
-  rpc HasPermission (HasPermissionRequest) returns (HasPermissionResponse);
-  rpc GetUserPermissions (GetUserPermissionsRequest) returns (GetUserPermissionsResponse);
-  rpc CreatePermission (CreatePermissionRequest) returns (CreatePermissionResponse);
-  rpc DeletePermission (DeletePermissionRequest) returns (DeletePermissionResponse);
-  rpc UpdatePermission (UpdatePermissionRequest) returns (UpdatePermissionResponse);
-  rpc GetPermissionByID (GetPermissionByIDRequest) returns (GetPermissionByIDResponse);
-  rpc GetPermissionByName (GetPermissionByNameRequest) returns (GetPermissionByNameResponse);
-  rpc GetAllPermissions (GetAllPermissionsRequest) returns (GetAllPermissionsResponse);
-  rpc AddPermissionToRole (AddPermissionToRoleRequest) returns (AddPermissionToRoleResponse);
-  rpc RemovePermissionFromRole (RemovePermissionFromRoleRequest) returns (RemovePermissionFromRoleResponse);
-  rpc GetRolePermissions (GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
+  rpc HasPermission(HasPermissionRequest) returns (HasPermissionResponse);
+  rpc GetUserPermissions(GetUserPermissionsRequest) returns (GetUserPermissionsResponse);
+  rpc CreatePermission(CreatePermissionRequest) returns (CreatePermissionResponse);
+  rpc DeletePermission(DeletePermissionRequest) returns (DeletePermissionResponse);
+  rpc UpdatePermission(UpdatePermissionRequest) returns (UpdatePermissionResponse);
+  rpc GetPermissionByID(GetPermissionByIDRequest) returns (GetPermissionByIDResponse);
+  rpc GetPermissionByName(GetPermissionByNameRequest) returns (GetPermissionByNameResponse);
+  rpc GetAllPermissions(GetAllPermissionsRequest) returns (GetAllPermissionsResponse);
+  rpc AddPermissionToRole(AddPermissionToRoleRequest) returns (AddPermissionToRoleResponse);
+  rpc RemovePermissionFromRole(RemovePermissionFromRoleRequest) returns (RemovePermissionFromRoleResponse);
+  rpc GetRolePermissions(GetRolePermissionsRequest) returns (GetRolePermissionsResponse);
 
-  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
-  rpc RefreshTokens (RefreshTokensRequest) returns (RefreshTokensResponse);
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc RefreshTokens(RefreshTokensRequest) returns (RefreshTokensResponse);
 }
 
 // --- User Authentication Messages ---
 
 message RegisterRequest {
   string email = 1 [(buf.validate.field).string = {
-    email: true,
+    email: true
     min_bytes: 5
   }];
   string password = 2 [(buf.validate.field).string = {
-    min_bytes: 8,
+    min_bytes: 8
     max_bytes: 64
   }];
 }
@@ -77,7 +77,7 @@ message ConfirmPasswordResetRequest {
   string email = 1 [(buf.validate.field).string.email = true];
   string reset_token = 2 [(buf.validate.field).string.min_bytes = 20];
   string new_password = 3 [(buf.validate.field).string = {
-    min_bytes: 8,
+    min_bytes: 8
     max_bytes: 64
   }];
 }
@@ -87,7 +87,7 @@ message ConfirmPasswordResetResponse {}
 message ChangePasswordRequest {
   string old_password = 1 [(buf.validate.field).string.min_bytes = 8];
   string new_password = 2 [(buf.validate.field).string = {
-    min_bytes: 8,
+    min_bytes: 8
     max_bytes: 64
   }];
 }
@@ -132,8 +132,8 @@ message GetAllRolesResponse {
 
 message CreateRoleRequest {
   string name = 1 [(buf.validate.field).string = {
-    min_bytes: 3,
-    max_bytes: 50,
+    min_bytes: 3
+    max_bytes: 50
     pattern: "^[a-z_]+$"
   }];
   string description = 2 [(buf.validate.field).string.max_bytes = 255];
@@ -152,8 +152,8 @@ message DeleteRoleResponse {}
 message UpdateRoleRequest {
   int64 role_id = 1 [(buf.validate.field).int64.gt = 0];
   string name = 2 [(buf.validate.field).string = {
-    min_bytes: 3,
-    max_bytes: 50,
+    min_bytes: 3
+    max_bytes: 50
     pattern: "^[a-z_]+$"
   }];
   string description = 3 [(buf.validate.field).string.max_bytes = 255];
@@ -165,8 +165,8 @@ message UpdateRoleResponse {}
 
 message CreatePermissionRequest {
   string name = 1 [(buf.validate.field).string = {
-    min_bytes: 3,
-    max_bytes: 50,
+    min_bytes: 3
+    max_bytes: 50
     pattern: "^[a-z_]+$"
   }];
   string description = 2 [(buf.validate.field).string.max_bytes = 255];
@@ -185,8 +185,8 @@ message DeletePermissionResponse {}
 message UpdatePermissionRequest {
   int64 permission_id = 1 [(buf.validate.field).int64.gt = 0];
   string name = 2 [(buf.validate.field).string = {
-    min_bytes: 3,
-    max_bytes: 50,
+    min_bytes: 3
+    max_bytes: 50
     pattern: "^[a-z_]+$"
   }];
   string description = 3 [(buf.validate.field).string.max_bytes = 255];
@@ -204,7 +204,7 @@ message GetPermissionByIDResponse {
 
 message GetPermissionByNameRequest {
   string name = 1 [(buf.validate.field).string = {
-    min_bytes: 3,
+    min_bytes: 3
     max_bytes: 50
   }];
 }
